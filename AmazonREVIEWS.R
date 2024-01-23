@@ -36,15 +36,14 @@ for(div_element in div_elements) {
   revstars_element <-  html_node(div_element, 'span.a-icon-alt')
   revSTARS<- ifelse(!is.na(revstars_element), html_text(revstars_element), '')
   
-  Categories <- c(Categories, category[1:100])
-   brandy_descriptions <- c(brandy_descriptions, brandydescr)
+    brandy_descriptions <- c(brandy_descriptions, brandydescr)
    price <- c(price, prices)
    num_of_rev <- c(num_of_rev, numberReviews)
    rev_stars <- c(rev_stars, revSTARS)
    
 }
 Scanner_df <- data.frame(  
-                    Categories= c('Laptop') , 
+                    Categories= c('Scanner') , 
                          Brand = brandy_descriptions,
                          Price = price, 
                          NumberOfReviews = num_of_rev, 
@@ -83,8 +82,7 @@ for(div_element in div_elements) {
   revstars_element <-  html_node(div_element, 'span.a-icon-alt')
   revSTARS<- ifelse(!is.na(revstars_element), html_text(revstars_element), '')
   
-  Categories <- c(Categories, category[1:100])
-  brandy_descriptions <- c(brandy_descriptions, brandydescr)
+   brandy_descriptions <- c(brandy_descriptions, brandydescr)
   price <- c(price, prices)
   num_of_rev <- c(num_of_rev, numberReviews)
   rev_stars <- c(rev_stars, revSTARS)
@@ -103,5 +101,5 @@ final_df<-rbind(Scanner_df,printer_df)
 final_df
 
  
-write_xlsx(final_df,"C:/Users/student/Documents/SADSAD BSIT-2B/AmazonScrape.xlsx")
+write_xlsx(final_df,"C:/Users/missy/OneDrive/Documents/githubcodes/SADSAD-BSIT-2B/AmazonScrape.xlsx")
 
