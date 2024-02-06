@@ -1,3 +1,15 @@
+---
+title: "ACTIVITY2_SADSAD"
+author: "BSIT-2B"
+date: "2024-02-06"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
 library(rvest)
 library(dplyr)
 library(writexl)
@@ -49,4 +61,4 @@ final_all_reviews <- do.call(rbind, all_reviews)
 
 View(final_all_reviews)
 
-write_xlsx(final_all_reviews, "scrape300reviews.xlsx")
+```
