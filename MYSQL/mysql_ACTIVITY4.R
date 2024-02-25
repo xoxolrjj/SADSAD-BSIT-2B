@@ -14,7 +14,7 @@ dbListFields(connection,"posts")
 
 
 queries <- c("INSERT INTO posts (id, author_id, title, description, content, date) VALUES (10,
-                                                                                      'Zhizhang Yuan, Daoze Zhang, Junru Chen, Geifei Gu, Yang Yang',
+                                                                                    r  'Zhizhang Yuan, Daoze Zhang, Junru Chen, Geifei Gu, Yang Yang',
                                                                                       'Brant-2: Foundation Model for Brain Signals',
                                                                                       'Neurons and Cognition (q-bio.NC)',
                                                                                       'Foundational models benefit from pre-training on large amounts of unlabeled data and enable strong performance in a wide variety of applications with a small amount of labeled data. Such models can be particularly effective in analyzing brain signals, as this field encompasses numerous application scenarios, and it is costly to perform large-scale annotation. In this work, we present the largest foundation model in brain signals, Brant-2. Compared to Brant, a foundation model designed for intracranial neural signals, Brant-2 not only exhibits robustness towards data variations and modeling scales but also can be applied to a broader range of brain neural data. By experimenting on an extensive range of tasks, we demonstrate that Brant-2 is adaptive to various application scenarios in brain signals. Further analyses reveal the scalability of the Brant-2, validate each components effectiveness, and showcase our models ability to maintain performance in scenarios with scarce labels. The source code and pre-trained weights are available at:',
@@ -74,13 +74,13 @@ queries <- c("INSERT INTO posts (id, author_id, title, description, content, dat
                                                                                       'Information Theory (cs.IT)',
                                                                                       'In this paper, we propose an efficient multi-stage algorithm for non-adaptive Group Testing (GT) with general correlated prior statistics. The proposed solution can be applied to any correlated statistical prior represented in trellis, e.g., finite state machines and Markov processes. We introduce a variation of List Viterbi Algorithm (LVA) to enable accurate recovery using much fewer tests than objectives, which efficiently gains from the correlated prior statistics structure. Our numerical results demonstrate that the proposed Multi-Stage GT (MSGT) algorithm can obtain the optimal Maximum A Posteriori (MAP) performance with feasible complexity in practical regimes, such as with COVID-19 and sparse signal recovery applications, and reduce in the scenarios tested the number of pooled tests by at least $25 compared to existing classical low complexity GT algorithms. Moreover, we analytically characterize the complexity of the proposed MSGT algorithm that guarantees its efficiency.',
                                                                                       '2023-2-15 15:31:56')"
-             )
-  
-for(query in queries)(
+)
+
+for (query in queries) {
   
   query_result <- dbSendQuery(connection, query)
   dbClearResult(query_result)
-)
+}
 
 
 # Execute the query
@@ -101,4 +101,3 @@ write.csv(posts_dta, file = "POSTS_DATA.csv")
 
 #disconnect from dbase
 dbDisconnect(connection)
-

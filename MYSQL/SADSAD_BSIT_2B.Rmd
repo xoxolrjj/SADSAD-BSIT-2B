@@ -1,0 +1,87 @@
+---
+title: '[CS102_ACTIVITY4_SQL]'
+author: "SADSAD_BSIT-2B"
+date: "2024-02-23"
+output:
+  pdf_document:
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#I import the csv file named Arxiv papers into an existing table in MYSQL and then I connect it to R, and get all of the databases instead. 
+#THIS IS THE COMMAND I MADE IN MariaDB 
+#first i made a table which name posts and create the table which contains id, title, author_id, description, content, date. 
+
+#this is the command. LOAD DATA FILE "PATH FILE" INTO TABLE table_name FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
+
+```{r}
+library("DBI")
+library("odbc")
+library("RMariaDB")
+library("dplyr")
+connection <- dbConnect(RMariaDB::MariaDB(),
+                        dsn="RMaria-connection",
+                        Server = "localhost",
+                        dbname = "sample_db",
+                        user = "root"
+)
+```
+
+### Listing the tables
+
+```{r}
+dbListTables(connection)
+
+```
+ 
+#listing the fields of the posts in the table sample_db
+
+```{r}
+dbListFields(connection,"posts")   
+
+```
+
+### Getting data from mysql
+
+```{r}
+posts_dta <- dbGetQuery(connection, "SELECT * FROM sample_db.posts ORDER BY ID")
+#and incase i wanna get 1-50 only i can add "ORDER BY ID LIMIT 50" SO I CAN ONLY GET 50.
+
+#to check columns and its content
+glimpse(posts_dta)
+
+tail(posts_dta)
+```
+
+
+```{r}
+#alternative way to display selected fields
+#displays the selected fields of the table
+posts_data <- dbGetQuery(connection, "SELECT title,description FROM sample_db.posts")
+posts_data[c(1:2),]
+```
+
+```{r}
+#getting all data using SELECT * FROM dbaseName
+
+
+SqlQuery <- "
+  SELECT title,description 
+  FROM sample_db.posts
+  "
+
+
+data_tibble <- as_tibble(dbGetQuery(connection,SqlQuery))
+```
+
+
+```{r}
+View(posts_dta)
+
+write.csv(posts_dta, file = "POSTS_DATA.csv", row.names = FALSE)
+
+#disconnect from dbase
+dbDisconnect(connection)
+```
+ 
