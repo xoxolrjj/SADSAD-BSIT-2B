@@ -2,7 +2,7 @@ library(readxl)
 library(lubridate)
 library(dplyr)
 
-cleaned_movies<- read_excel('C:/Users/User/Documents/Rstudio Files/cleaningDataSadsad/scrape3000reviews.xlsx')
+cleaned_movies<- read_excel('/cloud/project/CS102_LABORATORY5_SADSAD(Cleaned3kReviews)/scrape3000reviews.xlsx')
 cleaned_movies
 
 str(cleaned_movies)
@@ -25,5 +25,12 @@ cleaned_movies$User_Rating <- ifelse(is.na(cleaned_movies$User_Rating), mean(cle
   
 
 cleaned_movies 
+
+#REMOVING EMOTICONS
+cleaned_movies$Reviews <- gsub("[:;][-']?[)D(|/d]|^_^|-_-", "EMOJI", 
+                               cleaned_movies$Reviews)
+cleaned_movies$Content_Review <- gsub("[:;][-']?[)D(|/d]|^_^|-_-", "EMOJI", 
+                                      cleaned_movies$Content_Review)
+cleaned_movies
  
 write.csv(cleaned_movies, file= "cleaned_movies.csv")
